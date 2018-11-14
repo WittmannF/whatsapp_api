@@ -1,5 +1,5 @@
-# WhatsApp API on Selenium
-Easy to use API on selenium to have control of WhatsApp Web over the browser. 
+# WhatsApp Group API on Selenium
+Easy to use API on selenium to have control of a WhatsApp group using the web browser. 
 
 ### Implemented features
 - Get all contacts from a selected group
