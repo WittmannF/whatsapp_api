@@ -90,6 +90,9 @@ class WhatsApp:
         self._click(NEW_CHAT)
         self._send_keys(SEARCH_CONTACT, keyword)
         sleep(1)
-        self._click(FIRST_CONTACT)
+        try:
+            self._click(FIRST_CONTACT)
+        except Exception as e:
+            print("Contact not found")
 
 
