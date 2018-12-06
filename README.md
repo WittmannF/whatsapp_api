@@ -30,7 +30,7 @@ In [3]: wp.search_contact('+55000000000')
 - Phone number parser for performing set operations
 ```
     >>> group_numbers = wp.get_group_numbers()
-    >>> group_numbers = wp.parser(group_numbers[:-1])
+    >>> group_numbers = wp.parser(group_numbers[:-1]) # Remove last contact which is not a number ('You')
     >>> all_numbers = [...]
     >>> all_numbers = wp.parser(all_numbers)
     >>> not_joined = all_numbers - group_numbers
