@@ -19,6 +19,23 @@ Please scan the QR Code and enter in the group
 In [3]: wp.send_message('This message is going to be sent')
 In [4]: wp.write_message('This message is going to be written but not sent')
 ```
+- Search for a contact given a keyword (phone number or name)
+```
+In [1]: from whatsapp_api import WhatsApp
+In [2]: wp = WhatsApp()
+Loading...
+Please scan the QR Code and enter in the group
+In [3]: wp.search_contact('+55000000000')
+```
+- Phone number parser for performing set operations
+```
+    >>> group_numbers = wp.get_group_numbers()
+    >>> group_numbers = wp.parser(group_numbers[:-1])
+    >>> all_numbers = [...]
+    >>> all_numbers = wp.parser(all_numbers)
+    >>> not_joined = all_numbers - group_numbers
+```
+
 
 ### Possible future features
 - ?

@@ -1,14 +1,18 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from time import sleep
+import phonenumbers as p
 
 # Parameters
 WP_LINK = 'https://web.whatsapp.com'
 
 ## XPATHS
-CONTACTS_XPATH = '//*[@id="main"]/header/div[2]/div[2]/span'
+CONTACTS = '//*[@id="main"]/header/div[2]/div[2]/span'
 SEND = '//*[@id="main"]/footer/div[1]/div[3]'
 MESSAGE_BOX = '//*[@id="main"]/footer/div[1]/div[2]/div/div[2]'
+NEW_CHAT = '//*[@id="side"]/header/div[2]/div/span/div[2]/div'
+SEARCH_CONTACT = '//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div[1]/div/label/input'
+FIRST_CONTACT = '//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div[2]/div/div/div/div[2]/div'
 
 
 class WhatsApp:
@@ -17,6 +21,16 @@ class WhatsApp:
         self.driver.get(WP_LINK)
         print("Please scan the QR Code and enter in the group that you want to \
         have control")
+
+    @staticmethod
+    def parser(raw_list, code=None):
+        """
+        Parse a list of phone numbers to the E164 standard in order to compare two different sets (for example, check intersections).
+        Example:
+        """
+        parsed_numbers = [p.parse(r, None) for r in raw_list]
+        parsed_numbers_string = [p.format_number(n, p.PhoneNumberFormat.E164) for n in parsed_numbers]
+        return set(parsed_numbers_string)
 
     @staticmethod
     def _setup_driver():
@@ -66,9 +80,16 @@ class WhatsApp:
     def get_group_numbers(self):
         '''Get phone numbers from a whatsapp group'''
         try:
-            el = self.driver.find_element_by_xpath(CONTACTS_XPATH)
+            el = self.driver.find_element_by_xpath(CONTACTS)
             return el.text.split(',')
         except Exception as e:
             print("Group header not found")
+
+    def search_contact(self, keyword):
+        '''Write and send message'''
+        self._click(NEW_CHAT)
+        self._send_keys(SEARCH_CONTACT, keyword)
+        sleep(1)
+        self._click(FIRST_CONTACT)
 
 
