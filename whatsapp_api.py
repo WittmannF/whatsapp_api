@@ -15,7 +15,7 @@ FIRST_CONTACT = '//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div[2]/d
 
 
 class WhatsApp:
-    def _init_(self):
+    def __init__(self):
         self.driver = self._setup_driver()
         self.driver.get(WP_LINK)
         print("Please scan the QR Code and enter in the group that you want to \
@@ -76,3 +76,5 @@ class WhatsApp:
             self._click(FIRST_CONTACT)
         except Exception as e:
             print("Contact not found")
+
+
