@@ -1,7 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from time import sleep
-import phonenumbers as p
 
 # Parameters
 WP_LINK = 'https://web.whatsapp.com'
@@ -16,21 +15,11 @@ FIRST_CONTACT = '//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div[2]/d
 
 
 class WhatsApp:
-    def __init__(self):
+    def _init_(self):
         self.driver = self._setup_driver()
         self.driver.get(WP_LINK)
         print("Please scan the QR Code and enter in the group that you want to \
         have control")
-
-    @staticmethod
-    def parser(raw_list, code=None):
-        """
-        Parse a list of phone numbers to the E164 standard in order to compare two different sets (for example, check intersections).
-        Example:
-        """
-        parsed_numbers = [p.parse(r, None) for r in raw_list]
-        parsed_numbers_string = [p.format_number(n, p.PhoneNumberFormat.E164) for n in parsed_numbers]
-        return set(parsed_numbers_string)
 
     @staticmethod
     def _setup_driver():
@@ -56,16 +45,9 @@ class WhatsApp:
         el = self._get_element(xpath)
         el.click()
 
-    @staticmethod
-    def _convert(param):
-        if isinstance(param, str):
-            return param.decode('utf-8')
-        else:
-            return param
-
     def _send_keys(self, xpath, message):
         el = self._get_element(xpath)
-        el.send_keys(self._convert(message))
+        el.send_keys(message)
 
     def write_message(self, message):
         '''Write message in the text box but not send it'''
@@ -94,5 +76,3 @@ class WhatsApp:
             self._click(FIRST_CONTACT)
         except Exception as e:
             print("Contact not found")
-
-
