@@ -33,11 +33,13 @@ class WhatsApp:
         '''Safe get_element method with multiple attempts'''
         try:
             element = self.driver.find_element_by_xpath(xpath)
+            print('Found element!')
             return element
         except Exception as e:
             if _count<attempts:
                 sleep(1)
-                self._get_element(driver, xpath, attempts=attempts, _count=_count+1)
+                print(f'Attempt {_count}')
+                self._get_element(xpath, attempts=attempts, _count=_count+1)
             else:
                 print("Element not found")
 
