@@ -144,5 +144,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# PyCharm files
+# IDE folders
 .idea/
+.vs/
