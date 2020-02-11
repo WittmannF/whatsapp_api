@@ -36,7 +36,8 @@ In [3]: wp.search_contact('+55000000000')
     >>> all_numbers = wp.parser(all_numbers)
     >>> not_joined = all_numbers - group_numbers
 ```
-
+### Tutorial on Udemy (in Portuguese)
+- https://www.udemy.com/course/aprenda-a-programar-um-bot-do-whatsapp/?couponCode=PRECOMINIMO
 
 ### Possible future features
 - ?
