@@ -33,12 +33,12 @@ class WhatsApp:
         '''Safe get_element method with multiple attempts'''
         try:
             element = self.driver.find_element_by_xpath(xpath)
-            print('Found element!')
+            #print('Found element!')
             return element
         except Exception as e:
             if _count<attempts:
                 sleep(1)
-                print(f'Attempt {_count}')
+                #print(f'Attempt {_count}')
                 self._get_element(xpath, attempts=attempts, _count=_count+1)
             else:
                 print("Element not found")
@@ -78,5 +78,14 @@ class WhatsApp:
             self._click(FIRST_CONTACT)
         except Exception as e:
             print("Contact not found")
+            
+    def get_all_messages(self):
+        all_messages_element = self.driver.find_elements_by_class_name('_12pGw')
+        all_messages_text = [e.text for e in all_messages_element]
+        return all_messages_text
+        
+    def get_last_message(self):
+        all_messages = self.get_all_messages()
+        return all_messages[-1]
 
 
