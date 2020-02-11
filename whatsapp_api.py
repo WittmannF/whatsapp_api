@@ -18,8 +18,7 @@ class WhatsApp:
     def __init__(self):
         self.driver = self._setup_driver()
         self.driver.get(WP_LINK)
-        print("Please scan the QR Code and enter in the group that you want to \
-        have control")
+        print("Please scan the QR Code")
 
     @staticmethod
     def _setup_driver():
