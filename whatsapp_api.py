@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from time import sleep
 
@@ -10,8 +11,8 @@ CONTACTS = '//*[@id="main"]/header/div[2]/div[2]/span'
 SEND = '//*[@id="main"]/footer/div[1]/div[3]'
 MESSAGE_BOX = '//*[@id="main"]/footer/div[1]/div[2]/div/div[2]'
 NEW_CHAT = '//*[@id="side"]/header/div[2]/div/span/div[2]/div'
-SEARCH_CONTACT = '//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div[1]/div/label/input'
 FIRST_CONTACT = '//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div[2]/div/div/div/div[2]/div'
+SEARCH_CONTACT ='//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div[1]/div/label/div/div[2]'
 
 
 class WhatsApp:
@@ -54,6 +55,10 @@ class WhatsApp:
         '''Write message in the text box but not send it'''
         self._click(MESSAGE_BOX)
         self._send_keys(MESSAGE_BOX, message)
+
+    def _paste(self):
+        el = self._get_element(MESSAGE_BOX)
+        el.send_keys(Keys.SHIFT, Keys.INSERT)
 
     def send_message(self, message):
         '''Write and send message'''
