@@ -5,6 +5,7 @@ from time import sleep
 
 # Parameters
 WP_LINK = 'https://web.whatsapp.com'
+WP_APISEND= 'http://api.whatsapp.com/send?phone='
 
 ## XPATHS
 CONTACTS = '//*[@id="main"]/header/div[2]/div[2]/span'
@@ -13,7 +14,8 @@ MESSAGE_BOX = '//*[@id="main"]/footer/div[1]/div[2]/div/div[2]'
 NEW_CHAT = '//*[@id="side"]/header/div[2]/div/span/div[2]/div'
 FIRST_CONTACT = '//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div[2]/div/div/div/div[2]/div'
 SEARCH_CONTACT ='//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div[1]/div/label/div/div[2]'
-
+SEND_API = '//*[@id="action-button"]'
+USE_WPWEB = '//*[@id="fallback_block"]/div/div/a'
 
 class WhatsApp:
     def __init__(self):
@@ -91,5 +93,15 @@ class WhatsApp:
     def get_last_message(self):
         all_messages = self.get_all_messages()
         return all_messages[-1]
+
+    def without_contact(self, number):
+        self.driver.get(WP_APISEND+str(number))
+        sleep(2)
+        self._click(SEND_API)
+        sleep(2)
+        self._click(USE_WPWEB)
+
+
+
 
 
