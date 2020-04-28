@@ -79,7 +79,7 @@ class WhatsApp:
         '''Get phone numbers from a whatsapp group'''
         try:
             el = self.driver.find_element_by_xpath(CONTACTS)
-            return el.text.split(',')
+            return el.text.split(', ')
         except Exception as e:
             print("Group header not found")
 
