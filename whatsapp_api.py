@@ -9,6 +9,9 @@ WP_APISEND= 'http://api.whatsapp.com/send?phone='
 
 ## XPATHS
 CONTACTS = '//*[@id="main"]/header/div[2]/div[2]/span'
+MENU_CONTACT = '//*[@id="main"]/header/div[2]/div[1]/div/span'
+NUMBER_CONTACT3 = '//*[@id="app"]/div/div/div[2]/div[3]/span/div/span/div/div/div[1]/div[4]/div[3]/div/div/span/span'
+NUMBER_CONTACT2 = '//*[@id="app"]/div/div/div[2]/div[3]/span/div/span/div/div/div[1]/div[4]/div[3]/div/div/span/span'
 SEND = '//*[@id="main"]/footer/div[1]/div[3]'
 MESSAGE_BOX = '//*[@id="main"]/footer/div[1]/div[2]/div/div[2]'
 NEW_CHAT = '//*[@id="side"]/header/div[2]/div/span/div[2]/div'
@@ -16,6 +19,11 @@ FIRST_CONTACT = '//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div[2]/d
 SEARCH_CONTACT ='//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div[1]/div/label/div/div[2]'
 SEND_API = '//*[@id="action-button"]'
 USE_WPWEB = '//*[@id="fallback_block"]/div/div/a'
+
+## CLASSES
+CLOSE_CONTACT = '_1aTxu'
+
+
 
 class WhatsApp:
     def __init__(self):
@@ -100,8 +108,30 @@ class WhatsApp:
         self._click(SEND_API)
         sleep(2)
         self._click(USE_WPWEB)
+    
+    def get_number_contact(self, keyword):
+        self.search_contact(keyword)
+        self._click(MENU_CONTACT)
+        sleep(2)
+        if(str.isprintable(self._get_element(NUMBER_CONTACT2).text)):
+            number = self._get_element(NUMBER_CONTACT2).text
+        else:
+            number = self._get_element(NUMBER_CONTACT3).text
+        close_button = self.driver.find_element_by_class_name(CLOSE_CONTACT)
+        close_button.click()
+        return number
 
-
-
+    def parser(self, number):
+        number = str(number).replace(" ", "")
+        number = str(number).replace("+", "")
+        number = str(number).replace("-", "")
+        if(len(number)<13):
+            aux = []
+            for n in range(0,len(number)):
+                if(n==4):
+                    aux.append("9")
+                aux.append(number[n])
+            return "".join(map(str, aux))
+        return number
 
 
