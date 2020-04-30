@@ -19,6 +19,8 @@ FIRST_CONTACT = '//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div[2]/d
 SEARCH_CONTACT ='//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div[1]/div/label/div/div[2]'
 SEND_API = '//*[@id="action-button"]'
 USE_WPWEB = '//*[@id="fallback_block"]/div/div/a'
+NUMBER_NOTFOUNDBUTTON = '//*[@id="app"]/div/span[2]/div/span/div/div/div/div/div/div[2]/div'
+NUMBER_NOTFOUNDTEXT = '//*[@id="app"]/div/span[2]/div/span/div/div/div/div/div/div[1]'
 
 ## CLASSES
 CLOSE_CONTACT = '_1aTxu'
@@ -108,6 +110,12 @@ class WhatsApp:
         self._click(SEND_API)
         sleep(2)
         self._click(USE_WPWEB)
+        sleep(5)
+        if(self._get_element(NUMBER_NOTFOUNDBUTTON)):
+            print(self._get_element(NUMBER_NOTFOUNDTEXT).text)
+            self._click(NUMBER_NOTFOUNDBUTTON)
+
+        
     
     def get_number_contact(self, keyword):
         self.search_contact(keyword)
@@ -133,5 +141,4 @@ class WhatsApp:
                 aux.append(number[n])
             return "".join(map(str, aux))
         return number
-
-
+    
