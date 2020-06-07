@@ -1,3 +1,7 @@
+"""
+NOTE: This example has been presented at the following course: https://www.udemy.com/course/aprenda-a-programar-um-bot-do-whatsapp
+"""
+
 # Importar pacotes necessarios
 from time import sleep
 from whatsapp_api import WhatsApp
