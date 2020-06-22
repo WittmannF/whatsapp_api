@@ -58,5 +58,5 @@ In [3]: wp.search_contact('+55000000000')
 - ChromeDriver: http://chromedriver.chromium.org/
     - After downloading chromedriver, make sure to add in a folder accessible from the PATH
 
-### LICENCE
+### LICENSE
 MIT
