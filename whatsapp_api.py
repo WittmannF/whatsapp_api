@@ -10,7 +10,8 @@ WP_LINK = 'https://web.whatsapp.com'
 ## XPATHS
 CONTACTS = '//*[@id="main"]/header/div[2]/div[2]/span'
 SEND = "/html/body/div/div[1]/div[1]/div[4]/div[1]/footer/div[1]/div[2]/div/div[2]/button/span"
-MESSAGE_BOX = '//*[@id="main"]/footer/div[1]/div[2]/div/div[1]/div/div[2]'
+MESSAGE_BOX = '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[2]'
+SEND = '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[2]/button/span'
 NEW_CHAT = '//*[@id="side"]/header/div[2]/div/span/div[2]/div'
 FIRST_CONTACT = '//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div[2]/div/div/div/div[2]/div'
 SEARCH_CONTACT ='//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div[1]/div/label/div/div[2]'
@@ -85,7 +86,7 @@ class WhatsApp:
             print("Contact not found")
             
     def get_all_messages(self):
-        all_messages_element = self.driver.find_elements_by_class_name('_12pGw')
+        all_messages_element = self.driver.find_elements_by_class_name('_1Gy50')
         all_messages_text = [e.text for e in all_messages_element]
         return all_messages_text
         
