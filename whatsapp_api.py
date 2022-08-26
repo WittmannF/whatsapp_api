@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
 
@@ -11,7 +12,7 @@ WP_LINK = 'https://web.whatsapp.com'
 CONTACTS = '//*[@id="main"]/header/div[2]/div[2]/span'
 MESSAGE_BOX = '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]'
 SEND = '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[2]/button'
-NEW_CHAT = '//*[@id="side"]/header/div[2]/div/span/div[2]/div'
+NEW_CHAT = '//*[@id="app"]/div/div/div[3]/header/div[2]/div/span/div[2]/div'
 FIRST_CONTACT = '//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div[2]/div/div/div/div[2]/div'
 SEARCH_CONTACT = '//*[@id="app"]/div/div/div[2]/div[1]/span/div/span/div/div[1]/div/div/div[2]/div/div[2]'
 
@@ -32,7 +33,7 @@ class WhatsApp:
     def _get_element(self, xpath, attempts=5, _count=0):
         '''Safe get_element method with multiple attempts'''
         try:
-            element = self.driver.find_element_by_xpath(xpath)
+            element = self.driver.find_element(By.XPATH, xpath)
             #print('Found element!')
             return element
         except Exception as e:
@@ -68,7 +69,7 @@ class WhatsApp:
     def get_group_numbers(self):
         '''Get phone numbers from a whatsapp group'''
         try:
-            el = self.driver.find_element_by_xpath(CONTACTS)
+            el = self.driver.find_element(By.XPATH, CONTACTS)
             return el.text.split(',')
         except Exception as e:
             print("Group header not found")
@@ -84,7 +85,7 @@ class WhatsApp:
             print("Contact not found")
             
     def get_all_messages(self):
-        all_messages_element = self.driver.find_elements_by_class_name('_1Gy50')
+        all_messages_element = self.driver.find_elements(By.CLASS_NAME, '_1Gy50')
         all_messages_text = [e.text for e in all_messages_element]
         return all_messages_text
         
