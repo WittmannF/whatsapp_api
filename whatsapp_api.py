@@ -17,6 +17,10 @@ FIRST_CONTACT = '//*[@id="app"]/div/div[2]/div[2]/div[1]/span/div/span/div/div[2
 SEARCH_CONTACT = '//*[@id="app"]/div/div[2]/div[2]/div[1]/span/div/span/div/div[1]/div[2]/div[2]/div/div[1]'
 
 class WhatsApp:
+
+    if __name__ == '__main__':
+        main()
+
     def __init__(self):
         self.driver = self._setup_driver()
         self.driver.get(WP_LINK)
@@ -93,4 +97,24 @@ class WhatsApp:
         all_messages = self.get_all_messages()
         return all_messages[-1]
 
+    def zap_to_list(self, contact_list):
 
+        def search_contact(self, keyword):
+            '''Write and send message'''
+            self._click(NEW_CHAT)
+            self._send_keys(SEARCH_CONTACT, keyword)
+            sleep(1)
+            try:
+                self._click(FIRST_CONTACT)
+            except Exception as e:
+                print("Contact not found")
+
+        def send_message(self, message):
+            '''Write and send message'''
+            self.write_message(message)
+            self._click(SEND)
+
+        standard_message = input('Type your message: ')
+        for contact in contact_list:
+            do = search_contact(self, contact)
+            msg = send_message(self,standard_message)
